@@ -47,7 +47,7 @@ sub{
     align-items: center;
     margin:2px;
     flex: 1 0  calc(20% - 4px);
-    border-radius: 4px;
+    border-radius: 10px;
     opacity: .8;
     transition: all 0.1s ease-out;
 }
@@ -57,26 +57,26 @@ sub{
 }
 
 .d{
-    background: #eb0753;
+    background: #F12C18;
 }
   
 .e{
-    background: #ef3975;
+    background: #FF690D;
 }
   
 .f{
-    background: #f583a9;
+    background: #FCC931;
 }
   
 .g{
-    background: #924494;
+    background: #B400FF;
 }
   
 .a{
-    background: #be8fbf;
+    background: #2F93F6;
 }
 
 .b{
-    background: #d3b4d4;
+    background: #29DBE5;
 }
   
