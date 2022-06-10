@@ -1,6 +1,8 @@
 const pads = document.querySelectorAll(".pad");
 var synth= new Tone.PolySynth().toMaster();
-const now = Tone.now()
+const now = Tone.now();
+let startingTouchX;
+let startingTouchY;
 
 
 
@@ -13,8 +15,11 @@ const padsContainer = document.querySelector(".pads-container");
 
 function playNote(event){
     if(event.target.classList.contains("pad")){
+        startingTouchY=event.touches[0].clientY;
+        startingTouchX=event.touches[0].clientX;
         event.preventDefault();
         // synth.triggerAttackRelease(event.target.dataset.sound,"16n");
+        synth.set({ detune: 0, volume:0});
         synth.triggerAttack(event.target.dataset.sound);
         // wait one second before triggering the release
         event.target.style.opacity= "1";
@@ -31,14 +36,26 @@ function reset(event){
 
 }
 
+function detune(){
+    if(event.touches[0].clientX - startingTouchX>30){
+        synth.set({ detune: (event.touches[0].clientX - startingTouchX)*1.5-30});
+    }else if(event.touches[0].clientX - startingTouchX<-30){
+        synth.set({ detune: (event.touches[0].clientX - startingTouchX)*1.5+30});
+    }else{
+        synth.set({ detune: 0 });
+    }
+    synth.set({ volume: (startingTouchY - event.touches[0].clientY)*.03 });
+    // synth.set({ volume: (startingTouchY - event.touches[0].clientY)*.04 });
+}
 
-padsContainer.addEventListener("mousedown",playNote);
 
+// padsContainer.addEventListener("mousedown",playNote);
 padsContainer.addEventListener("touchstart",playNote);
-
 padsContainer.addEventListener("touchend",reset);
-padsContainer.addEventListener("mouseup",reset);
-padsContainer.addEventListener("mouseout",reset);
+padsContainer.addEventListener("touchmove",detune);
+
+// padsContainer.addEventListener("mouseup",reset);
+// padsContainer.addEventListener("mouseout",reset);
 
 
 
@@ -64,5 +81,37 @@ window.addEventListener("resize",()=>{
     setTimeout(setViewportHeight, 100);
 });
 
+
+
+
+
+
+
+// (function(){
+//     console.log('show-touch-js loaded!');
+//     var svg_body = 'data:image/svg+xml,%3Csvg width=\'200\' height=\'200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg%3E%3Cellipse opacity=\'0.65\' ry=\'50\' rx=\'50\' id=\'svg_1\' cy=\'100\' cx=\'100\' stroke-width=\'100\' stroke=\'%23000\' fill=\'%23000\'/%3E%3Cellipse opacity=\'0.55\' ry=\'35\' rx=\'35\' id=\'svg_2\' cy=\'100\' cx=\'100\' stroke-width=\'100\' stroke=\'%23FFF\' fill=\'%23FFF\'/%3E%3C/g%3E%3C/svg%3E';
+//     img = document.createElement('img');
+//     img.src = svg_body;
+//     img.style.width = '3em';
+//     img.style.height = '3em';
+//     img.style.display = 'none';
+//     img.style.position = 'absolute';
+//     document.addEventListener("DOMContentLoaded", function() {
+//         document.body.append(img);
+//         var showButtonHandler = function(event){
+//             img.style.display = '';
+//             img.style.left = 'calc(' + event.touches[0].clientX + 'px - 2em)';
+//             img.style.top = 'calc(' + event.touches[0].clientY + 'px - 1.5em)';
+//         };
+//         pads.forEach(pad =>{
+//             pad.addEventListener("touchmove", showButtonHandler);
+//             pad.addEventListener("touchstart", showButtonHandler);
+//             pad.addEventListener("touchend", function(event){
+//                 img.style.display = 'none';
+//             });
+    
+//         });
+//     });
+// })();
 
 

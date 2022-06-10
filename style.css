@@ -4,6 +4,8 @@ body{
     
 }
 
+
+
 .pads-container{
     display:flex;
     flex-direction: column;
@@ -21,6 +23,10 @@ img {
     
 }
 
+p{
+    pointer-events: none;
+}
+
 .row{
     display:flex;
     flex-wrap: wrap;
@@ -30,7 +36,6 @@ img {
 
 sub{
     position: relative;
-    top:5px;
 }
 
 .pad{
@@ -42,7 +47,7 @@ sub{
     align-items: center;
     margin:2px;
     flex: 1 0  calc(20% - 4px);
-    border-radius: 10px;
+    border-radius: 4px;
     opacity: .8;
     transition: all 0.1s ease-out;
 }
@@ -52,26 +57,26 @@ sub{
 }
 
 .d{
-    background: #F12C18;
+    background: #eb0753;
 }
   
 .e{
-    background: #FF690D;
+    background: #ef3975;
 }
   
 .f{
-    background: #FCC931;
+    background: #f583a9;
 }
   
 .g{
-    background: #B400FF;
+    background: #924494;
 }
   
 .a{
-    background: #2F93F6;
+    background: #be8fbf;
 }
 
 .b{
-    background: #29DBE5;
+    background: #d3b4d4;
 }
   
