@@ -14,6 +14,8 @@ const padsContainer = document.querySelector(".pads-container");
 
 
 function playNote(event){
+    synth.triggerRelease(event.target.dataset.sound);
+
     if(event.target.classList.contains("pad")){
         startingTouchY=event.touches[0].clientY;
         startingTouchX=event.touches[0].clientX;
@@ -37,15 +39,69 @@ function reset(event){
 }
 
 function detune(){
-    if(event.touches[0].clientX - startingTouchX>30){
-        synth.set({ detune: (event.touches[0].clientX - startingTouchX)*1.5-30});
-    }else if(event.touches[0].clientX - startingTouchX<-30){
-        synth.set({ detune: (event.touches[0].clientX - startingTouchX)*1.5+30});
-    }else{
-        synth.set({ detune: 0 });
+    if(event.touches.length===1){
+        if(event.target.classList.contains("e")){
+            if (event.touches[0].clientX - startingTouchX>60){
+                synth.set({ detune: 100});
+            }else if (event.touches[0].clientX - startingTouchX<-60){
+                synth.set({ detune: -200});    
+            }else if(event.touches[0].clientX - startingTouchX>20){
+                synth.set({ detune: (event.touches[0].clientX - startingTouchX)*1.75-30});
+            }else if(event.touches[0].clientX - startingTouchX<-20){
+                synth.set({ detune: (event.touches[0].clientX - startingTouchX)*3.5+30});
+            }else{
+                synth.set({ detune: 0 });
+            }
+        }else if(event.target.classList.contains("f")){
+            if (event.touches[0].clientX - startingTouchX>60){
+                synth.set({ detune: 200});
+            }else if (event.touches[0].clientX - startingTouchX<-60){
+                synth.set({ detune: -100});    
+            }else if(event.touches[0].clientX - startingTouchX>20){
+                synth.set({ detune: (event.touches[0].clientX - startingTouchX)*3.5-30});
+            }else if(event.touches[0].clientX - startingTouchX<-20){
+                synth.set({ detune: (event.touches[0].clientX - startingTouchX)*1.75+30});
+            }else{
+                synth.set({ detune: 0 });
+            }
+        }else if(event.target.classList.contains("c")){
+            if (event.touches[0].clientX - startingTouchX>60){
+                synth.set({ detune: 200});
+            }else if (event.touches[0].clientX - startingTouchX<-60){
+                synth.set({ detune: -100});    
+            }else if(event.touches[0].clientX - startingTouchX>20){
+                synth.set({ detune: (event.touches[0].clientX - startingTouchX)*3.5-30});
+            }else if(event.touches[0].clientX - startingTouchX<-20){
+                synth.set({ detune: (event.touches[0].clientX - startingTouchX)*1.75+30});
+            }else{
+                synth.set({ detune: 0 });
+            }
+        }else if(event.target.classList.contains("b")){
+            if (event.touches[0].clientX - startingTouchX>60){
+                synth.set({ detune: 100});
+            }else if (event.touches[0].clientX - startingTouchX<-60){
+                synth.set({ detune: -200});    
+            }else if(event.touches[0].clientX - startingTouchX>20){
+                synth.set({ detune: (event.touches[0].clientX - startingTouchX)*1.75-30});
+            }else if(event.touches[0].clientX - startingTouchX<-20){
+                synth.set({ detune: (event.touches[0].clientX - startingTouchX)*3.5+30});
+            }else{
+                synth.set({ detune: 0 });
+            }
+        }else if (event.touches[0].clientX - startingTouchX>60){
+            synth.set({ detune: 200});
+        }else if (event.touches[0].clientX - startingTouchX<-60){
+            synth.set({ detune: -200});    
+        }else if(event.touches[0].clientX - startingTouchX>20){
+            synth.set({ detune: (event.touches[0].clientX - startingTouchX)*3.5-30});
+        }else if(event.touches[0].clientX - startingTouchX<-20){
+            synth.set({ detune: (event.touches[0].clientX - startingTouchX)*3.5+30});
+        }else{
+            synth.set({ detune: 0 });
+        }
+        synth.set({ volume: (startingTouchY - event.touches[0].clientY)*.03 });
+        // synth.set({ volume: (startingTouchY - event.touches[0].clientY)*.04 });
     }
-    synth.set({ volume: (startingTouchY - event.touches[0].clientY)*.03 });
-    // synth.set({ volume: (startingTouchY - event.touches[0].clientY)*.04 });
 }
 
 
@@ -57,13 +113,6 @@ padsContainer.addEventListener("touchmove",detune);
 // padsContainer.addEventListener("mouseup",reset);
 // padsContainer.addEventListener("mouseout",reset);
 
-
-
-function noteDown(e, isSharp){
-    var note = e.dataset.note;
-    e.style.background = isSharp ? 'black' : '#ccc'
-    synth.triggerAttackRelease(note,"16n");
-}
 
 
 
