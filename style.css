@@ -25,7 +25,6 @@ img {
 
 p{
     pointer-events: none;
-    opacity: .7;
 }
 
 .row{
@@ -40,7 +39,7 @@ sub{
 }
 
 .pad{
-    height: 19vw;   
+    height: 20vw;   
     width: 20vw;
 
     display: flex;
