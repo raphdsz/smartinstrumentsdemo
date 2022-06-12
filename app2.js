@@ -41,61 +41,61 @@ function reset(event){
 function detune(){
     if(event.touches.length===1){
         if(event.target.classList.contains("e")){
-            if (event.touches[0].clientX - startingTouchX>60){
+            if (event.touches[0].clientX - startingTouchX>40){
                 synth.set({ detune: 100});
-            }else if (event.touches[0].clientX - startingTouchX<-60){
+            }else if (event.touches[0].clientX - startingTouchX<-40){
                 synth.set({ detune: -200});    
             }else if(event.touches[0].clientX - startingTouchX>20){
-                synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*2.5});
+                synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*4.85});
             }else if(event.touches[0].clientX - startingTouchX<-20){
-                synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*5});
+                synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*9.7});
             }else{
                 synth.set({ detune: 0 });
             }
         }else if(event.target.classList.contains("f")){
-            if (event.touches[0].clientX - startingTouchX>60){
+            if (event.touches[0].clientX - startingTouchX>40){
                 synth.set({ detune: 200});
-            }else if (event.touches[0].clientX - startingTouchX<-60){
+            }else if (event.touches[0].clientX - startingTouchX<-40){
                 synth.set({ detune: -100});    
             }else if(event.touches[0].clientX - startingTouchX>20){
-                synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*5});
+                synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*9.7});
             }else if(event.touches[0].clientX - startingTouchX<-20){
-                synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*2.5});
+                synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*4.85});
             }else{
                 synth.set({ detune: 0 });
             }
         }else if(event.target.classList.contains("c")){
-            if (event.touches[0].clientX - startingTouchX>60){
+            if (event.touches[0].clientX - startingTouchX>40){
                 synth.set({ detune: 200});
-            }else if (event.touches[0].clientX - startingTouchX<-60){
+            }else if (event.touches[0].clientX - startingTouchX<-40){
                 synth.set({ detune: -100});    
             }else if(event.touches[0].clientX - startingTouchX>20){
-                synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*5});
+                synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*9.7});
             }else if(event.touches[0].clientX - startingTouchX<-20){
-                synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*2.5});
+                synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*4.85});
             }else{
                 synth.set({ detune: 0 });
             }
         }else if(event.target.classList.contains("b")){
-            if (event.touches[0].clientX - startingTouchX>60){
+            if (event.touches[0].clientX - startingTouchX>40){
                 synth.set({ detune: 100});
-            }else if (event.touches[0].clientX - startingTouchX<-60){
+            }else if (event.touches[0].clientX - startingTouchX<-40){
                 synth.set({ detune: -200});    
             }else if(event.touches[0].clientX - startingTouchX>20){
-                synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*2.5});
+                synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*4.85});
             }else if(event.touches[0].clientX - startingTouchX<-20){
-                synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*5});
+                synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*9.7});
             }else{
                 synth.set({ detune: 0 });
             }
-        }else if (event.touches[0].clientX - startingTouchX>60){
+        }else if (event.touches[0].clientX - startingTouchX>40){
             synth.set({ detune: 200});
-        }else if (event.touches[0].clientX - startingTouchX<-60){
+        }else if (event.touches[0].clientX - startingTouchX<-40){
             synth.set({ detune: -200});    
         }else if(event.touches[0].clientX - startingTouchX>20){
-            synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*5});
+            synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*9.7});
         }else if(event.touches[0].clientX - startingTouchX<-20){
-            synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*5});
+            synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*9.7});
         }else{
             synth.set({ detune: 0 });
         }

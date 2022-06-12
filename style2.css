@@ -39,14 +39,14 @@ sub{
 }
 
 .pad{
-    height: 20vw;   
-    width: 20vw;
+    height: 33.333vw;   
+    width: 14.285vw;
 
     display: flex;
     justify-content: center;
     align-items: center;
     margin:2px;
-    flex: 1 0  calc(20% - 4px);
+    flex: 1 0  calc(14.285% - 4px);
     border-radius: 10px;
     opacity: .8;
     transition: all 0.1s ease-out;
