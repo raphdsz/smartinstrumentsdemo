@@ -18,7 +18,7 @@ body{
 
 }
 
-img {
+.imagesTemp {
     width: 100vw;
     
 }
@@ -78,4 +78,47 @@ sub{
 
 .b{
     background: #F12C18;
+}
+
+.c{
+    background: #F1F4F6;
+}
+
+.d{
+    background: #29DBE5;
+}
+  
+.e{
+    background: #2F93F6;
+}
+  
+.f{
+    background: #B400FF;
+}
+  
+.g{
+    background: #FCC931;
+}
+  
+.a{
+    background: #FF690D;
+}
+
+.b{
+    background: #F12C18;
+}
+
+.pointer{
+    
+    box-sizing: border-box;
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    border:2px solid rgba(0,0,0,0.5);
+    background:rgba(255, 255, 255, .8);
+    pointer-events: none;
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    transition:visibility 0.5s, opacity 0.5s ease;
 }
