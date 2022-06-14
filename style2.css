@@ -1,3 +1,9 @@
+* {
+    touch-action: manipulation;
+    box-sizing: border-box;
+
+  }
+  
 body{
     background: black;
     font-family: 'Poppins', sans-serif;
@@ -6,22 +12,49 @@ body{
 
 
 
-.pads-container{
+.main-container{
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     justify-content: center;
-  
     height: 100vh;
-    height: calc(var(--vh, 1vh)*100);
+    height: calc(var(--vh, 1vh)*98);
 
 }
+
 
 .imagesTemp {
     width: 100vw;
     
 }
+
+.buttons-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    pointer-events: none;
+}
+
+.imageLeft{
+    height: 60px;
+}
+
+.imageButton{
+    height: 32px;
+    margin: 5px;
+}
+
+.octaveButton{
+    margin-left: auto;
+}
+
+.scaleButton{
+    pointer-events: all;
+    transition: all 0.5s ease;
+}
+
 
 p{
     pointer-events: none;
@@ -38,46 +71,23 @@ sub{
     position: relative;
 }
 
+.pads-container{
+    width: 95vw;
+    display: flex;
+    flex-direction: column;
+
+}
+
 .pad{
     height: 33.333vw;   
-    width: 14.285vw;
-
     display: flex;
     justify-content: center;
     align-items: center;
     margin:2px;
-    flex: 1 0  calc(14.285% - 4px);
+    flex: 1 0;
     border-radius: 10px;
     opacity: .8;
     transition: all 0.1s ease-out;
-}
-
-.c{
-    background: white;
-}
-
-.d{
-    background: #29DBE5;
-}
-  
-.e{
-    background: #2F93F6;
-}
-  
-.f{
-    background: #B400FF;
-}
-  
-.g{
-    background: #FCC931;
-}
-  
-.a{
-    background: #FF690D;
-}
-
-.b{
-    background: #F12C18;
 }
 
 .c{
@@ -88,11 +98,11 @@ sub{
     background: #29DBE5;
 }
   
-.e{
+.e, .dsharp{
     background: #2F93F6;
 }
   
-.f{
+.f, .esharp{
     background: #B400FF;
 }
   
@@ -100,11 +110,11 @@ sub{
     background: #FCC931;
 }
   
-.a{
+.a, .gsharp{ 
     background: #FF690D;
 }
 
-.b{
+.b ,.asharp{
     background: #F12C18;
 }
 

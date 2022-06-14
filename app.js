@@ -111,11 +111,13 @@ function detune(){
 function addTouchLength(){
     eventTouchArray.push(event.touches.length);
 }
+
 function changeTouchLength(){
-    if (eventTouchArray[eventTouchArray.length] != eventTouchArray[eventTouchArray.length-1]){
+    if (eventTouchArray[eventTouchArray.length-1]>=2){
         startingTouchY=event.touches[0].clientY;
         startingTouchX=event.touches[0].clientX;
     }
+
 }
 
 
