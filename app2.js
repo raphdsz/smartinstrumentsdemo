@@ -108,37 +108,42 @@ function detune(){
     if(event.touches.length===1){
         if(event.touches[0].clientX - startingTouchX>20){
             if(event.target.classList.contains("full-up")){
-                synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*9.7});
                 if (event.touches[0].clientX - startingTouchX>40){
                     synth.set({ detune: 200});
+                }else{
+                    synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*9.7});
                 }
             }else if(event.target.classList.contains("half-up")){
-                synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*4.85});
-
                 if (event.touches[0].clientX - startingTouchX>40){
                     synth.set({ detune: 100});
+                }else{
+                    synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*4.85});
                 }
             }else if(event.target.classList.contains("twofull-up")){
-                synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*9.7/2*3});
                 if (event.touches[0].clientX - startingTouchX>40){
                     synth.set({ detune: 300});
+                }else{
+                    synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*9.7/2*3});
                 }
             }
         }else if (event.touches[0].clientX - startingTouchX<-20){
             if(event.target.classList.contains("full-down")){
-                synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*9.7});
                 if (event.touches[0].clientX - startingTouchX<-40){
                     synth.set({ detune: -200});
+                }else{
+                    synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*9.7});
                 }
             }else if(event.target.classList.contains("half-down")){
-                synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*4.85});
                 if (event.touches[0].clientX - startingTouchX<-40){
                     synth.set({ detune: -100});
+                }else{
+                    synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*4.85});
                 }
             }else if(event.target.classList.contains("twofull-down")){
-                synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*9.7/2*3});
                 if (event.touches[0].clientX - startingTouchX<-40){
                     synth.set({ detune: -300});
+                }else{
+                    synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*9.7/2*3});
                 }
             }
         }else{
