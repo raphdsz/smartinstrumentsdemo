@@ -51,6 +51,7 @@ function changeScale(){
         notesObj["scale"]="maj"
     }
     createPads();
+    createPointer();
 };
 
 
