@@ -19,12 +19,6 @@ notesClass:['c full-up half-down','d full-up full-down','e half-up full-down','f
 };
 
 
-// notesObj["notes"] = ['c','c#','d','d#','e','f','f#','g','g#','a','a#','b'];
-// notesObj["notesClass"] = ['c half-up half-down','c# half-up half-down chrom','d half-up half-down','dsharp half-up half-down chrom','e half-up half-down','f half-up half-down','fsharp half-up half-down chrom','g half-up half-down','gsharp half-up half-down chrom','a half-up half-down','asharp half-up half-down chrom','b half-up half-down'];
-// notesObj["scale"]="maj"
-
-
-
 scaleButton.addEventListener("touchstart",changeScale);
 scaleButton.addEventListener("touchend",function(){
     setTimeout(function(){
@@ -69,7 +63,7 @@ function createPads(){
     let notesIndex = 0;
     let rowIndex = 4;
     let octIndex = 3;
-    const numOfPadsInRow= 5;
+    const numOfPadsInRow= 4;
     const numOfMaxPads =  numOfPadsInRow*numOfPadsInRow;
 
     for (let padsIndex = 1; padsIndex <=numOfMaxPads; padsIndex++){
@@ -218,8 +212,8 @@ function reset(event){
 
 
 function detune(){
-    let minDist=20;
-    let maxDist=60;
+    let minDist=50;
+    let maxDist=80;
     let movementMultiplier = maxDist/12;
     if(event.touches.length===1){
         if(event.touches[0].clientX - startingTouchX>minDist){

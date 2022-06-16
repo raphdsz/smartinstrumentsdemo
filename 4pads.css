@@ -77,14 +77,13 @@ sub{
 
 
 .pad{
-    height: 20vw;   
+    height: 23vw;   
     width: 20vw;
-
     display: flex;
     justify-content: center;
     align-items: center;
     margin:2px;
-    flex: 1 0  calc(20% - 4px);
+    flex: 1 0  calc(25% - 4px);
     border-radius: 10px;
     opacity: .8;
     transition: all 0.1s ease-out;
@@ -116,11 +115,6 @@ sub{
 
 .b ,.asharp{
     background: #F12C18;
-}
-
-.chrom{
-    background: #282C32;
-    color: #7E8999;
 }
 
 .pointer{

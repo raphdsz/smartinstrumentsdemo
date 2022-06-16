@@ -1,17 +1,19 @@
+//dynamically add pads
+
+//select rows
+const rows = document.querySelectorAll(".row");
+//selectors
 const pads = document.querySelectorAll(".pad");
 var synth= new Tone.PolySynth().toMaster();
 const now = Tone.now();
 let startingTouchX;
 let startingTouchY;
 let eventTouchArray=[];
+const padsContainer = document.querySelector(".pads-container");
 var pointer = document.querySelectorAll('.pointer');
 const scaleButton = document.querySelector('.scaleButton');
 
 
-
-const padsContainer = document.querySelector(".pads-container");
-
-//create notes
 const notesObj = 
 {scale:"maj", 
 notes: ['c','d','e','f','g','a','b'],
@@ -19,11 +21,7 @@ notesClass:['c full-up half-down','d full-up full-down','e half-up full-down','f
 };
 
 
-// notesObj["notes"] = ['c','c#','d','d#','e','f','f#','g','g#','a','a#','b'];
-// notesObj["notesClass"] = ['c half-up half-down','c# half-up half-down chrom','d half-up half-down','dsharp half-up half-down chrom','e half-up half-down','f half-up half-down','fsharp half-up half-down chrom','g half-up half-down','gsharp half-up half-down chrom','a half-up half-down','asharp half-up half-down chrom','b half-up half-down'];
-// notesObj["scale"]="maj"
-
-
+// let notes = ['c','d','e','f','g','a','b'];
 
 scaleButton.addEventListener("touchstart",changeScale);
 scaleButton.addEventListener("touchend",function(){
@@ -52,72 +50,31 @@ function changeScale(){
         notesObj["notesClass"] = ['c full-up half-down','d full-up full-down','e half-up full-down','f full-up half-down','g full-up full-down','a full-up full-down','b half-up full-down'];
         notesObj["scale"]="maj"
     }
-    synth.triggerRelease(event.target.dataset.sound);
     createPads();
     createPointer();
 };
 
 
 
-//generate pads
-const rows = document.querySelectorAll(".row");
-
 function createPads(){
     let html = "";
     let notes = notesObj["notes"]
     let notesClass = notesObj["notesClass"];
-    let notesIndex = 0;
-    let rowIndex = 4;
-    let octIndex = 3;
-    const numOfPadsInRow= 5;
-    const numOfMaxPads =  numOfPadsInRow*numOfPadsInRow;
 
-    for (let padsIndex = 1; padsIndex <=numOfMaxPads; padsIndex++){
-        //add pad of "noteclass[notesindex] notes[notesindex] and oct[index]" to "rowindex"
-        html += `<div class="pad ${notesClass[notesIndex]}" data-sound="${notes[notesIndex]}${octIndex}"><p>${notes[notesIndex]}<sub>${octIndex}</sub></p></div>`;
 
-        //if row is filled with 5 pads, go to next row
-        if (padsIndex%numOfPadsInRow===0){
-            rows[rowIndex].innerHTML=html;
-            html ="";
-            rowIndex--;
+    rows.forEach(row => {
+
+        for (let i = 0; i <notes.length ; i++){
+            let note = notes[i];
+            let noteClass = notesClass[i];
+            html += `<div class="pad ${noteClass}" data-sound="${note}${row.dataset.oct}"><p>${note}<sub>${row.dataset.oct}</sub></p></div>`;
+            html += '</div>';
+
         }
-
-        //add oct once all notes go thru one
-        if (padsIndex%notes.length===0){
-            octIndex++;
-        }
-        
-        //reset notes to starting 
-        if (notesIndex< notes.length-1){
-            notesIndex++;
-        } else{
-            notesIndex=0;
-        }
-
-
-    };
-
-
-    // rows.forEach(row => {
-
-    //     for (let i = 0; i <notes.length ; i++){
-    //         let note = notes[i];
-    //         let noteClass = notesClass[i];
-    //         html += `<div class="pad ${noteClass}" data-sound="${note}${row.dataset.oct}"><p>${note}<sub>${row.dataset.oct}</sub></p></div>`;
-    //         html += '</div>';
-
-    //     }
-    //     row.innerHTML=html;
-    //     html ="";
-    // });
+        row.innerHTML=html;
+        html ="";
+    });
 }
-
-createPads();
-createPointer();
-
-
-
 
 
 
@@ -133,14 +90,11 @@ function playNote(event){
         synth.triggerAttack(event.target.dataset.sound);
         // wait one second before triggering the release
         event.target.style.opacity= "1";
-        detune();
     }
 
 }
 function reset(event){
-    
     if(event.target.classList.contains("pad")){
-
         synth.triggerRelease(event.target.dataset.sound);
 
         event.target.style.opacity= "0.8";
@@ -148,74 +102,6 @@ function reset(event){
     }
 
 }
-
-// function detune(){
-    
-//     if(event.touches.length===1){
-//         if(event.target.classList.contains("e")){
-//             if (event.touches[0].clientX - startingTouchX>60){
-//                 synth.set({ detune: 100});
-//             }else if (event.touches[0].clientX - startingTouchX<-60){
-//                 synth.set({ detune: -200});    
-//             }else if(event.touches[0].clientX - startingTouchX>20){
-//                 synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*2.5});
-//             }else if(event.touches[0].clientX - startingTouchX<-20){
-//                 synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*5});
-//             }else{
-//                 synth.set({ detune: 0 });
-//             }
-//         }else if(event.target.classList.contains("f")){
-//             if (event.touches[0].clientX - startingTouchX>60){
-//                 synth.set({ detune: 200});
-//             }else if (event.touches[0].clientX - startingTouchX<-60){
-//                 synth.set({ detune: -100});    
-//             }else if(event.touches[0].clientX - startingTouchX>20){
-//                 synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*5});
-//             }else if(event.touches[0].clientX - startingTouchX<-20){
-//                 synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*2.5});
-//             }else{
-//                 synth.set({ detune: 0 });
-//             }
-//         }else if(event.target.classList.contains("c")){
-//             if (event.touches[0].clientX - startingTouchX>60){
-//                 synth.set({ detune: 200});
-//             }else if (event.touches[0].clientX - startingTouchX<-60){
-//                 synth.set({ detune: -100});    
-//             }else if(event.touches[0].clientX - startingTouchX>20){
-//                 synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*5});
-//             }else if(event.touches[0].clientX - startingTouchX<-20){
-//                 synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*2.5});
-//             }else{
-//                 synth.set({ detune: 0 });
-//             }
-//         }else if(event.target.classList.contains("b")){
-//             if (event.touches[0].clientX - startingTouchX>60){
-//                 synth.set({ detune: 100});
-//             }else if (event.touches[0].clientX - startingTouchX<-60){
-//                 synth.set({ detune: -200});    
-//             }else if(event.touches[0].clientX - startingTouchX>20){
-//                 synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*2.5});
-//             }else if(event.touches[0].clientX - startingTouchX<-20){
-//                 synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*5});
-//             }else{
-//                 synth.set({ detune: 0 });
-//             }
-//         }else if (event.touches[0].clientX - startingTouchX>60){
-//             synth.set({ detune: 200});
-//         }else if (event.touches[0].clientX - startingTouchX<-60){
-//             synth.set({ detune: -200});    
-//         }else if(event.touches[0].clientX - startingTouchX>20){
-//             synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*5});
-//         }else if(event.touches[0].clientX - startingTouchX<-20){
-//             synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*5});
-//         }else{
-//             synth.set({ detune: 0 });
-//         }
-//         synth.set({ volume: (startingTouchY - event.touches[0].clientY)*.03 });
-//         // synth.set({ volume: (startingTouchY - event.touches[0].clientY)*.04 });
-//     }
-// }
-
 
 function detune(){
     let minDist=20;
@@ -266,30 +152,15 @@ function detune(){
             synth.set({ detune: 0 });
         }
         synth.set({ volume: (startingTouchY - event.touches[0].clientY)*.03 });
+    }
     
-    }
-}
-
-
-function addTouchLength(){
-    eventTouchArray.push(event.touches.length);
-}
-
-function changeTouchLength(){
-    if (eventTouchArray[eventTouchArray.length-1]>=2){
-        startingTouchY=event.touches[0].clientY;
-        startingTouchX=event.touches[0].clientX;
-    }
 
 }
-
 
 // padsContainer.addEventListener("mousedown",playNote);
 padsContainer.addEventListener("touchstart",playNote);
 padsContainer.addEventListener("touchend",reset);
 padsContainer.addEventListener("touchmove",detune);
-padsContainer.addEventListener("touchstart",addTouchLength);
-padsContainer.addEventListener("touchend",changeTouchLength);
 
 // padsContainer.addEventListener("mouseup",reset);
 // padsContainer.addEventListener("mouseout",reset);
@@ -303,7 +174,8 @@ function setViewportHeight(){
     document.documentElement.style.setProperty('--vh', `${vh}px`);
 }
 
-
+createPads();
+createPointer();
 setViewportHeight();
 
 
@@ -313,10 +185,16 @@ window.addEventListener("resize",()=>{
 
 
 
+function addTouchLength(){
+    eventTouchArray.push(event.touches.length);
+}
 
-
-
-
+function changeTouchLength(){
+    if (eventTouchArray[eventTouchArray.length-1]>=2){
+        startingTouchY=event.touches[0].clientY;
+        startingTouchX=event.touches[0].clientX;
+    }
+}
 function createPointer(){
     const pads = document.querySelectorAll(".pad");
     var showButtonHandler = function(event){
@@ -405,3 +283,17 @@ function createPointer(){
 
 
 };
+
+
+// padsContainer.addEventListener("mousedown",playNote);
+padsContainer.addEventListener("touchstart",playNote);
+padsContainer.addEventListener("touchend",reset);
+padsContainer.addEventListener("touchmove",detune);
+padsContainer.addEventListener("touchstart",addTouchLength);
+padsContainer.addEventListener("touchend",changeTouchLength);
+
+
+
+
+
+

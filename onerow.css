@@ -3,7 +3,7 @@
     box-sizing: border-box;
 
   }
-
+  
 body{
     background: black;
     font-family: 'Poppins', sans-serif;
@@ -18,10 +18,11 @@ body{
     justify-content: center;
     align-items: center;
     justify-content: center;
-    height: 98vh;
+    height: 100vh;
     height: calc(var(--vh, 1vh)*98);
 
 }
+
 
 .imagesTemp {
     width: 100vw;
@@ -54,6 +55,7 @@ body{
     transition: all 0.5s ease;
 }
 
+
 p{
     pointer-events: none;
 }
@@ -73,18 +75,16 @@ sub{
     width: 95vw;
     display: flex;
     flex-direction: column;
+
 }
 
-
 .pad{
-    height: 20vw;   
-    width: 20vw;
-
+    height: 33.333vw;   
     display: flex;
     justify-content: center;
     align-items: center;
     margin:2px;
-    flex: 1 0  calc(20% - 4px);
+    flex: 1 0;
     border-radius: 10px;
     opacity: .8;
     transition: all 0.1s ease-out;
@@ -116,11 +116,6 @@ sub{
 
 .b ,.asharp{
     background: #F12C18;
-}
-
-.chrom{
-    background: #282C32;
-    color: #7E8999;
 }
 
 .pointer{
