@@ -19,13 +19,14 @@ body{
     align-items: center;
     justify-content: center;
     height: 98vh;
+    /* width: 100vw; */
+    height: calc(var(--vh, 1vh)*98);
     height: calc(var(--vh, 1vh)*98);
 
 }
 
 .imagesTemp {
     width: 100vw;
-    
 }
 
 .buttons-container{
@@ -136,4 +137,46 @@ sub{
     opacity: 0;
     position: absolute;
     transition:visibility 0.5s, opacity 0.5s ease;
+}
+
+h4, h3{
+    color: white
+}
+
+h4{
+    opacity: .5;
+}
+
+
+.scale-selector{
+    position: absolute;
+    top:0;
+    left:0;
+    height: 100%;
+    width: 100%;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20vh 0;
+    margin: auto;
+    z-index: 1;
+    opacity: 1;
+    opacity: 0;
+    transition: all 0.2s ease;
+    pointer-events: none;
+}
+
+.scale-selector.active{
+    pointer-events: all;
+    opacity: .8;
+}
+
+.close-scale{
+    position: fixed;
+    height: 32px;
+    margin: 5px;
+    top:30px;
+    right:30px;
 }

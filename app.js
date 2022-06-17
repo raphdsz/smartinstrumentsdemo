@@ -6,6 +6,13 @@ let startingTouchY;
 let eventTouchArray=[];
 var pointer = document.querySelectorAll('.pointer');
 const scaleButton = document.querySelector('.scaleButton');
+const scaleMenu = document.querySelector('.scale-selector');
+const scaleClose = document.querySelector('.close-scale');
+const majScale = document.querySelector('.major-scale');
+const majPenScale = document.querySelector('.major-pen-scale');
+const minScale = document.querySelector('.minor-scale');
+const minPenScale = document.querySelector('.minor-pen-scale');
+
 
 
 
@@ -25,7 +32,14 @@ notesClass:['c full-up half-down','d full-up full-down','e half-up full-down','f
 
 
 
-scaleButton.addEventListener("touchstart",changeScale);
+scaleButton.addEventListener("touchstart",function(){
+    scaleMenu.classList.add("active");
+});
+
+scaleClose.addEventListener("touchstart",function(){
+    scaleMenu.classList.remove("active");
+});
+// scaleButton.addEventListener("touchstart",changeScale);
 scaleButton.addEventListener("touchend",function(){
     setTimeout(function(){
         scaleButton.style.transform = "scale(1)";
@@ -35,24 +49,59 @@ scaleButton.addEventListener("touchend",function(){
     
 });
 
+
+majScale.addEventListener("touchstart",function(){
+    notesObj["notes"] = ['c','d','e','f','g','a','b'];
+    notesObj["notesClass"] = ['c full-up half-down','d full-up full-down','e half-up full-down','f full-up half-down','g full-up full-down','a full-up full-down','b half-up full-down'];
+    notesObj["scale"]="maj"
+    createPads();
+    createPointer();
+});
+majPenScale.addEventListener("touchstart",function(){
+    notesObj["notes"] = ['c','d','e','g','a'];
+    notesObj["notesClass"] = ['c full-up threehalf-down','d full-up full-down','e full-down threehalf-up','g full-up threehalf-down','a full-down threehalf-up'];
+    notesObj["scale"]="maj-pen";
+    createPads();
+    createPointer();
+});
+minScale.addEventListener("touchstart",function(){
+    notesObj["notes"] = ['c','d','d#','e#','g','g#','a#'];
+    notesObj["notesClass"] = ['c full-up full-down','d half-up full-down','dsharp full-up half-down','esharp full-up full-down','g half-up full-down','gsharp full-up half-down','asharp full-up full-down'];
+    notesObj["scale"]="min"
+    createPads();
+    createPointer();
+});
+minPenScale.addEventListener("touchstart",function(){
+    notesObj["notes"] = ['c','d#','f','g','a#'];
+    notesObj["notesClass"] = ['c threehalf-up full-down','dsharp full-up threehalf-down','f full-up full-down','g threehalf-up full-down','asharp full-up threehalf-down'];
+    notesObj["scale"]="min-pen"
+    createPads();
+    createPointer();
+});
+
+
+
 function changeScale(){
     scaleButton.style.opacity =".6";
     scaleButton.style.transform = "scale(1.1)";
 
     if (notesObj["scale"]==="maj"){
         notesObj["notes"] = ['c','d','e','g','a'];
-        notesObj["notesClass"] = ['c full-up twofull-down','d full-up full-down','e full-down twofull-up','g full-up twofull-down','a full-down twofull-up'];
+        notesObj["notesClass"] = ['c full-up threehalf-down','d full-up full-down','e full-down threehalf-up','g full-up threehalf-down','a full-down threehalf-up'];
         notesObj["scale"]="maj-pen"
     } else if (notesObj["scale"]==="maj-pen"){
         notesObj["notes"] = ['c','d','d#','e#','g','g#','a#'];
         notesObj["notesClass"] = ['c full-up full-down','d half-up full-down','dsharp full-up half-down','esharp full-up full-down','g half-up full-down','gsharp full-up half-down','asharp full-up full-down'];
         notesObj["scale"]="min"
+    } else if (notesObj["scale"]==="min"){
+        notesObj["notes"] = ['c','d#','f','g','a#'];
+        notesObj["notesClass"] = ['c threehalf-up full-down','dsharp full-up threehalf-down','f full-up full-down','g threehalf-up full-down','asharp full-up threehalf-down'];
+        notesObj["scale"]="min-pen"
     } else{
         notesObj["notes"] = ['c','d','e','f','g','a','b'];
         notesObj["notesClass"] = ['c full-up half-down','d full-up full-down','e half-up full-down','f full-up half-down','g full-up full-down','a full-up full-down','b half-up full-down'];
         notesObj["scale"]="maj"
     }
-    synth.triggerRelease(event.target.dataset.sound);
     createPads();
     createPointer();
 };
@@ -235,7 +284,7 @@ function detune(){
                 }else{
                     synth.set({ detune: (event.touches[0].clientX - startingTouchX-minDist)*movementMultiplier/2});
                 }
-            }else if(event.target.classList.contains("twofull-up")){
+            }else if(event.target.classList.contains("threehalf-up")){
                 if (event.touches[0].clientX - startingTouchX>maxDist){
                     synth.set({ detune: 300});
                 }else{
@@ -255,7 +304,7 @@ function detune(){
                 }else{
                     synth.set({ detune: (event.touches[0].clientX - startingTouchX+minDist)*movementMultiplier/2});
                 }
-            }else if(event.target.classList.contains("twofull-down")){
+            }else if(event.target.classList.contains("threehalf-down")){
                 if (event.touches[0].clientX - startingTouchX<-maxDist){
                     synth.set({ detune: -300});
                 }else{
