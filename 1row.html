@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./onerow.css">
+    <link rel="stylesheet" href="./1row.css">
 </head>
 <body>
     <div class="main-container">
@@ -17,59 +17,55 @@
             <img class="imageLeft"src="./images/left.png">
             <img class="imageButton octaveButton"src="./images/octave.png">
             <img class="imageButton scaleButton"src="./images/scale.png">
-            <img class="imageButton"src="./images/close.png">
+            <img class="imageButton closeButton"src="./images/close.png">
         </div>
-
         <div class="pads-container">
-            <div class="row 5" data-oct="5">
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="scale-selector-container">
+                <div class="scale-selector">
+                    <div class="key">
+                        <h4>Key</h3>
+                            <h3 class="c-key active keybutton">c</h3>
+                            <h3 class="csharp-key keybutton">c#</h3>
+                            <h3 class="d-key keybutton">d</h3>
+                            <h3 class="dsharp-key keybutton">d#</h3>
+                            <h3 class="e-key keybutton">e</h3>
+                            <h3 class="f-key keybutton">f</h3>
+                            <h3 class="fsharp-key keybutton">f#</h3>
+                            <h3 class="g-key keybutton">g</h3>
+                            <h3 class="gsharp-key keybutton">g#</h3>
+                            <h3 class="a-key keybutton">a</h3>
+                            <h3 class="asharp-key keybutton">a#</h3>
+                            <h3 class="b-key keybutton">b</h3>
+                    </div> 
+                    <div class="  scale">
+                        <h4>Scale</h3>
+                            <h3 class="chromatic-scale">Chromatic</h3>
+                            <h3 class="major-scale active">Major</h3>
+                            <h3 class="major-pen-scale">Major Pentatonic</h3>
+                            <h3 class="minor-scale">Minor</h3>
+                            <h3 class="minor-pen-scale">Minor Pentatonic</h3>
+                            </div> 
+                </div>
+                
             </div>
-            <div class="row 4" data-oct="4">
-            </div>
-            <div class="row 3" data-oct="3">
-            </div>
-
+    
         </div>
         <img class="imagesTemp" src="./images/bottom.png">
-        <img class="pointer"></img>        
-        <img class="pointer"></img>
-        <img class="pointer"></img>
-        <img class="pointer"></img>
-        <img class="pointer"></img>
+        <span class="pointer"></span>        
+        <span class="pointer"></span>
+        <span class="pointer"></span>
+        <span class="pointer"></span>
+        <span class="pointer"></span>
+    
     </div>
 
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js" integrity="sha512-59wz3/QJMP1QgULLB5O08pqS8wIdlvK1iJaRZm6ESyRrUuxjdRrnKepXKbSTbjX3ZZZ19AbiCJZEaZN7Zm8OjQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="onerow.js"></script>
+    <script src="1row.js"></script>
 
 </body>
 </html>
-
-
-<!--             <div class=" 5" data-oct="5">
-                <div class="pad c" data-sound="c5"><p>c<sub>5</sub></p></div>
-                <div class="pad d" data-sound="d5"><p>d<sub>5</sub></p></div>
-                <div class="pad e" data-sound="e5"><p>e<sub>5</sub></p></div>
-                <div class="pad f" data-sound="f5"><p>f<sub>5</sub></p></div>
-                <div class="pad g" data-sound="g5"><p>g<sub>5</sub></p></div>
-                <div class="pad a" data-sound="a5"><p>a<sub>5</sub></p></div>
-                <div class="pad b" data-sound="b5"><p>b<sub>5</sub></p></div>
-            </div>
-            <div class="row 4" data-oct="4">
-                <div class="pad c" data-sound="c4"><p>c<sub>4</sub></p></div>
-                <div class="pad d" data-sound="d4"><p>d<sub>4</sub></p></div>
-                <div class="pad e" data-sound="e4"><p>e<sub>4</sub></p></div>
-                <div class="pad f" data-sound="f4"><p>f<sub>4</sub></p></div>
-                <div class="pad g" data-sound="g4"><p>g<sub>4</sub></p></div>
-                <div class="pad a" data-sound="a4"><p>a<sub>4</sub></p></div>
-                <div class="pad b" data-sound="b4"><p>b<sub>4</sub></p></div>
-            </div>
-            <div class="row 3" data-oct="3">
-                <div class="pad c" data-sound="c3"><p>c<sub>3</sub></p></div>
-                <div class="pad d" data-sound="d3"><p>d<sub>3</sub></p></div>
-                <div class="pad e" data-sound="e3"><p>e<sub>3</sub></p></div>
-                <div class="pad f" data-sound="f3"><p>f<sub>3</sub></p></div>
-                <div class="pad g" data-sound="g3"><p>g<sub>3</sub></p></div>
-                <div class="pad a" data-sound="a3"><p>a<sub>3</sub></p></div>
-                <div class="pad b" data-sound="b3"><p>b<sub>3</sub></p></div>
-            </div>
- -->

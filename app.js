@@ -7,22 +7,41 @@ let eventTouchArray=[];
 var pointer = document.querySelectorAll('.pointer');
 const scaleButton = document.querySelector('.scaleButton');
 const scaleMenu = document.querySelector('.scale-selector');
-const scaleClose = document.querySelector('.close-scale');
+// const scaleClose = document.querySelector('.close-scale');
 const majScale = document.querySelector('.major-scale');
 const majPenScale = document.querySelector('.major-pen-scale');
 const minScale = document.querySelector('.minor-scale');
 const minPenScale = document.querySelector('.minor-pen-scale');
-
+const chrScale = document.querySelector('.chromatic-scale');
+const cKey = document.querySelector('.c-key');
+const csharpKey = document.querySelector('.csharp-key');
+const dKey = document.querySelector('.d-key');
+const dsharpKey = document.querySelector('.dsharp-key');
+const eKey = document.querySelector('.e-key');
+const fKey = document.querySelector('.f-key');
+const fsharpKey = document.querySelector('.fsharp-key');
+const gKey = document.querySelector('.g-key');
+const gsharpKey = document.querySelector('.gsharp-key');
+const aKey = document.querySelector('.a-key');
+const asharpKey = document.querySelector('.asharp-key');
+const bKey = document.querySelector('.b-key');
+const keybutton = document.querySelectorAll('.keybutton');
+const closeButton = document.querySelector(".closeButton");
 
 
 
 const padsContainer = document.querySelector(".pads-container");
 
+let currentScale ="maj";
+let currentKey=0;
+
+
+
 //create notes
 const notesObj = 
-{scale:"maj", 
-notes: ['c','d','e','f','g','a','b'],
-notesClass:['c full-up half-down','d full-up full-down','e half-up full-down','f full-up half-down','g full-up full-down','a full-up full-down','b half-up full-down']
+{scale:currentScale, 
+notes: [],
+notesClass:[]
 };
 
 
@@ -31,87 +50,321 @@ notesClass:['c full-up half-down','d full-up full-down','e half-up full-down','f
 // notesObj["scale"]="maj"
 
 
+var toggle = false;
+
+function toggleImg(){
+    if (toggle === true) {
+        scaleButton.src="./images/scale.png";
+        closeButton.style.opacity=1;
+    } else {
+        scaleButton.src="./images/Scale_Selected.png";
+        closeButton.style.opacity=.3;
+    }
+    toggle = !toggle; 
+
+}
 
 scaleButton.addEventListener("touchstart",function(){
-    scaleMenu.classList.add("active");
+    scaleMenu.classList.toggle("active");
+    toggleImg();
 });
 
-scaleClose.addEventListener("touchstart",function(){
-    scaleMenu.classList.remove("active");
+const octaveButton = document.querySelector('.octaveButton');
+
+
+octaveButton.addEventListener("touchstart",function(){
 });
+
 // scaleButton.addEventListener("touchstart",changeScale);
-scaleButton.addEventListener("touchend",function(){
-    setTimeout(function(){
-        scaleButton.style.transform = "scale(1)";
-        scaleButton.style.opacity ="1";
-    }, 100);
+// scaleButton.addEventListener("touchend",function(){
+//     setTimeout(function(){
+//         scaleButton.style.transform = "scale(1)";
+//         scaleButton.style.opacity ="1";
+//     }, 100);
 
     
-});
+// });
+
+function generateScale(scaleType, startingNote){
+    var NOTES_NUM_NAMES = ["c", "c#", "d", "d#", "e", "f", "f#", "g", "g#", "a", "a#", "b","c oct", "c# oct", "d oct", "d# oct", "e oct", "f oct", "f# oct", "g oct", "g# oct", "a oct", "a# oct", "b oct"]
 
 
-majScale.addEventListener("touchstart",function(){
-    notesObj["notes"] = ['c','d','e','f','g','a','b'];
-    notesObj["notesClass"] = ['c full-up half-down','d full-up full-down','e half-up full-down','f full-up half-down','g full-up full-down','a full-up full-down','b half-up full-down'];
-    notesObj["scale"]="maj"
-    createPads();
-    createPointer();
-});
-majPenScale.addEventListener("touchstart",function(){
-    notesObj["notes"] = ['c','d','e','g','a'];
-    notesObj["notesClass"] = ['c full-up threehalf-down','d full-up full-down','e full-down threehalf-up','g full-up threehalf-down','a full-down threehalf-up'];
-    notesObj["scale"]="maj-pen";
-    createPads();
-    createPointer();
-});
-minScale.addEventListener("touchstart",function(){
-    notesObj["notes"] = ['c','d','d#','e#','g','g#','a#'];
-    notesObj["notesClass"] = ['c full-up full-down','d half-up full-down','dsharp full-up half-down','esharp full-up full-down','g half-up full-down','gsharp full-up half-down','asharp full-up full-down'];
-    notesObj["scale"]="min"
-    createPads();
-    createPointer();
-});
-minPenScale.addEventListener("touchstart",function(){
-    notesObj["notes"] = ['c','d#','f','g','a#'];
-    notesObj["notesClass"] = ['c threehalf-up full-down','dsharp full-up threehalf-down','f full-up full-down','g threehalf-up full-down','asharp full-up threehalf-down'];
-    notesObj["scale"]="min-pen"
-    createPads();
-    createPointer();
-});
-
-
-
-function changeScale(){
-    scaleButton.style.opacity =".6";
-    scaleButton.style.transform = "scale(1.1)";
-
-    if (notesObj["scale"]==="maj"){
-        notesObj["notes"] = ['c','d','e','g','a'];
-        notesObj["notesClass"] = ['c full-up threehalf-down','d full-up full-down','e full-down threehalf-up','g full-up threehalf-down','a full-down threehalf-up'];
-        notesObj["scale"]="maj-pen"
-    } else if (notesObj["scale"]==="maj-pen"){
-        notesObj["notes"] = ['c','d','d#','e#','g','g#','a#'];
-        notesObj["notesClass"] = ['c full-up full-down','d half-up full-down','dsharp full-up half-down','esharp full-up full-down','g half-up full-down','gsharp full-up half-down','asharp full-up full-down'];
-        notesObj["scale"]="min"
-    } else if (notesObj["scale"]==="min"){
-        notesObj["notes"] = ['c','d#','f','g','a#'];
-        notesObj["notesClass"] = ['c threehalf-up full-down','dsharp full-up threehalf-down','f full-up full-down','g threehalf-up full-down','asharp full-up threehalf-down'];
-        notesObj["scale"]="min-pen"
-    } else{
-        notesObj["notes"] = ['c','d','e','f','g','a','b'];
-        notesObj["notesClass"] = ['c full-up half-down','d full-up full-down','e half-up full-down','f full-up half-down','g full-up full-down','a full-up full-down','b half-up full-down'];
-        notesObj["scale"]="maj"
+    let scale = [];
+    if (scaleType==="maj"){
+        scale = [-1,0,2,4,5,7,9,11,12];
+    } else if (scaleType==="min"){
+        scale = [-2,0,2,3,5,7,8,10,12];
+    } else if(scaleType==="min-pen"){
+        scale = [-2,0,3,5,7,10,12];
+    } else if(scaleType==="maj-pen"){
+        scale = [-3,0,2,4,7,9,12];
+    } else if(scaleType==="chr"){
+        scale = [-1,0,1,2,3,4,5,6,7,8,9,10,11,12];
     }
+    // var startingNote = 0;  // C
+    var myScale = [];
+    var myScaleClass = [];
+    let nextInterval;
+    let prevInterval;
+    
+    for(var i=1; i < scale.length-1; i++) {
+        let currentNote = NOTES_NUM_NAMES[scale[i] + startingNote];
+        myScale.push(currentNote);
+        if(scale[i+1] - scale[i]===2){
+            nextInterval = " full-up"
+        }else if(scale[i+1] - scale[i]===1){
+            nextInterval = " half-up"
+        }else{
+            nextInterval = " threehalf-up"
+        }
+        if(i===1){
+            if(scale[i-1]===-2){
+                prevInterval = " full-down"
+            }else if(scale[i-1]===-1){
+                prevInterval = " half-down"
+            }else{
+                prevInterval = " threehalf-down"
+            }
+        }
+        else if(scale[i] - scale[i-1]===2){
+            prevInterval = " full-down"
+        }else if(scale[i] - scale[i-1]===1){
+            prevInterval = " half-down"
+        }else{
+            prevInterval = " threehalf-down"
+        }
+    myScaleClass.push(currentNote + nextInterval + prevInterval);
+        nextInterval="";
+        prevInterval="";
+    }
+    notesObj["notes"] = myScale;
+    notesObj["notesClass"] = myScaleClass;
+    notesObj["scale"]=scaleType;
+    
+createPads(startingNote);
+createPointer();
+
+}
+
+
+
+majScale.addEventListener("touchstart",function(e){
+    e.preventDefault();
+    majScale.classList.add("active");
+    majPenScale.classList.remove("active");
+    minScale.classList.remove("active");
+    minPenScale.classList.remove("active");
+    chrScale.classList.remove("active");
+    currentScale="maj";
+    generateScale(currentScale,currentKey);
     createPads();
     createPointer();
-};
+});
+majPenScale.addEventListener("touchstart",function(e){
+    e.preventDefault();
+    majScale.classList.remove("active");
+    majPenScale.classList.add("active");
+    minScale.classList.remove("active");
+    minPenScale.classList.remove("active");
+    chrScale.classList.remove("active");
+    chrScale.classList.remove("active");
+    currentScale="maj-pen";
+    generateScale(currentScale,currentKey);
+    createPads();
+    createPointer();
+});
+minScale.addEventListener("touchstart",function(e){
+    e.preventDefault();
+    majScale.classList.remove("active");
+    majPenScale.classList.remove("active");
+    minScale.classList.add("active");
+    minPenScale.classList.remove("active");
+    chrScale.classList.remove("active");
+    currentScale="min";
+    generateScale(currentScale,currentKey);
+    createPads();
+    createPointer();
+});
+minPenScale.addEventListener("touchstart",function(e){
+    e.preventDefault();
+    majScale.classList.remove("active");
+    majPenScale.classList.remove("active");
+    minScale.classList.remove("active");
+    minPenScale.classList.add("active");
+    chrScale.classList.remove("active");
+    currentScale="min-pen";
+    generateScale(currentScale,currentKey);
+    createPads();
+    createPointer();
+});
+chrScale.addEventListener("touchstart",function(e){
+    e.preventDefault();
+    majScale.classList.remove("active");
+    majPenScale.classList.remove("active");
+    minScale.classList.remove("active");
+    minPenScale.classList.remove("active");
+    chrScale.classList.add("active");
+    currentScale="chr";
+    generateScale(currentScale,currentKey);
+    createPads();
+    createPointer();
+});
+
+
+
+
+
+cKey.addEventListener("touchend",function(e){
+    e.preventDefault();
+    keybutton.forEach(key=>{
+        key.classList.remove("active");
+    })
+    cKey.classList.add("active");
+    currentKey=0;
+    generateScale(currentScale,currentKey);
+    createPads();
+    createPointer();
+});
+
+csharpKey.addEventListener("touchend",function(e){
+    e.preventDefault();
+    keybutton.forEach(key=>{
+        key.classList.remove("active");
+    })
+    csharpKey.classList.add("active");
+    currentKey=1;
+    generateScale(currentScale,currentKey);
+    createPads();
+    createPointer();
+});
+
+
+dKey.addEventListener("touchend",function(e){
+    e.preventDefault();
+    keybutton.forEach(key=>{
+        key.classList.remove("active");
+    })
+    dKey.classList.add("active");
+    currentKey=2;
+    generateScale(currentScale,currentKey);
+    createPads();
+    createPointer();
+});
+
+dsharpKey.addEventListener("touchend",function(e){
+    e.preventDefault();
+    keybutton.forEach(key=>{
+        key.classList.remove("active");
+    })
+    dsharpKey.classList.add("active");
+    currentKey=3;
+    generateScale(currentScale,currentKey);
+    createPads();
+    createPointer();
+});
+
+eKey.addEventListener("touchend",function(e){
+    e.preventDefault();
+    keybutton.forEach(key=>{
+        key.classList.remove("active");
+    })
+    eKey.classList.add("active");
+    currentKey=4;
+    generateScale(currentScale,currentKey);
+    createPads();
+    createPointer();
+});
+
+fKey.addEventListener("touchend",function(e){
+    e.preventDefault();
+    keybutton.forEach(key=>{
+        key.classList.remove("active");
+    })
+    fKey.classList.add("active");
+    currentKey=5;
+    generateScale(currentScale,currentKey);
+    createPads();
+    createPointer();
+});
+fsharpKey.addEventListener("touchend",function(e){
+    e.preventDefault();
+    keybutton.forEach(key=>{
+        key.classList.remove("active");
+    })
+    fsharpKey.classList.add("active");
+    currentKey=6;
+    generateScale(currentScale,currentKey);
+    createPads();
+    createPointer();
+});
+
+gKey.addEventListener("touchend",function(e){
+    e.preventDefault();
+    keybutton.forEach(key=>{
+        key.classList.remove("active");
+    })
+    gKey.classList.add("active");
+    currentKey=7;
+    generateScale(currentScale,currentKey);
+    createPads();
+    createPointer();
+});
+
+gsharpKey.addEventListener("touchend",function(e){
+    e.preventDefault();
+    keybutton.forEach(key=>{
+        key.classList.remove("active");
+    })
+    gsharpKey.classList.add("active");
+    currentKey=7;
+    generateScale(currentScale,currentKey);
+    createPads();
+    createPointer();
+});
+
+aKey.addEventListener("touchend",function(e){
+    e.preventDefault();
+    keybutton.forEach(key=>{
+        key.classList.remove("active");
+    })
+    aKey.classList.add("active");
+    currentKey=9;
+    generateScale(currentScale,currentKey);
+    createPads();
+    createPointer();
+});
+asharpKey.addEventListener("touchend",function(e){
+    e.preventDefault();
+    keybutton.forEach(key=>{
+        key.classList.remove("active");
+    })
+    asharpKey.classList.add("active");
+    currentKey=10;
+    generateScale(currentScale,currentKey);
+    createPads();
+    createPointer();
+});
+
+bKey.addEventListener("touchend",function(e){
+    e.preventDefault();
+    keybutton.forEach(key=>{
+        key.classList.remove("active");
+    })
+    bKey.classList.add("active");
+    currentKey=11;
+    generateScale(currentScale,currentKey);
+    createPads();
+    createPointer();
+});
+
+
 
 
 
 //generate pads
 const rows = document.querySelectorAll(".row");
 
-function createPads(){
+function createPads(startingNote){
     let html = "";
     let notes = notesObj["notes"]
     let notesClass = notesObj["notesClass"];
@@ -120,10 +373,27 @@ function createPads(){
     let octIndex = 3;
     const numOfPadsInRow= 5;
     const numOfMaxPads =  numOfPadsInRow*numOfPadsInRow;
+    let octChecker =false;
+    let chr="";
+
+    if (notesObj["scale"]==="chr"){
+        chr="chr"
+    }else{
+        chr="";
+    }
 
     for (let padsIndex = 1; padsIndex <=numOfMaxPads; padsIndex++){
+        let currentNote = notes[notesIndex];
+        if(notes[notesIndex].includes(" oct")){
+            currentNote = notes[notesIndex].replace(" oct",'');
+            octChecker=true;
+            if(!notes[notesIndex-1].includes(" oct")){
+                octIndex++;    
+            }
+        }
+
         //add pad of "noteclass[notesindex] notes[notesindex] and oct[index]" to "rowindex"
-        html += `<div class="pad ${notesClass[notesIndex]}" data-sound="${notes[notesIndex]}${octIndex}"><p>${notes[notesIndex]}<sub>${octIndex}</sub></p></div>`;
+        html += `<div class="pad ${notesClass[notesIndex]} padcolor${notesIndex} ${chr}" data-sound="${currentNote}${octIndex}"><p>${currentNote}<sub>${octIndex}</sub></p></div>`;
 
         //if row is filled with 5 pads, go to next row
         if (padsIndex%numOfPadsInRow===0){
@@ -133,17 +403,17 @@ function createPads(){
         }
 
         //add oct once all notes go thru one
-        if (padsIndex%notes.length===0){
-            octIndex++;
-        }
         
         //reset notes to starting 
         if (notesIndex< notes.length-1){
             notesIndex++;
         } else{
+            if(octChecker===false){
+                octIndex++;    
+            }
             notesIndex=0;
-        }
 
+        }
 
     };
 
@@ -162,8 +432,6 @@ function createPads(){
     // });
 }
 
-createPads();
-createPointer();
 
 
 
@@ -374,7 +642,7 @@ function createPointer(){
         pointer[0].style.opacity = '1';
         pointer[0].style.left = 'calc(' + event.touches[0].clientX + 'px - 1.5em)';
         pointer[0].style.top = 'calc(' + event.touches[0].clientY + 'px - 1.5em)';
-
+        // pointer[0].style.background = event
         if (event.touches.length===2){
             pointer[1].style.visibility = 'visible';  
             pointer[1].style.opacity = '1';
@@ -454,3 +722,6 @@ function createPointer(){
 
 
 };
+
+
+generateScale(currentScale,currentKey);

@@ -1,27 +1,31 @@
 * {
     touch-action: manipulation;
     box-sizing: border-box;
+    
 
   }
 
 body{
     background: black;
     font-family: 'Poppins', sans-serif;
-    
+    overflow: hidden;
+    touch-action: manipulation;
+
 }
+
+
 
 
 
 .main-container{
     display:flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     justify-content: center;
-    height: 98vh;
     /* width: 100vw; */
+    height: 98vh;
     height: calc(var(--vh, 1vh)*98);
-    height: calc(var(--vh, 1vh)*98);
+
 
 }
 
@@ -48,14 +52,21 @@ body{
 
 .octaveButton{
     margin-left: auto;
+    pointer-events: all;
+
 }
 
 .scaleButton{
     pointer-events: all;
-    transition: all 0.5s ease;
+    /* transition: all 0.5s ease; */
+}
+
+.closeButton{
+    transition: opacity 0.5s ease;
 }
 
 p{
+    transition: all 0.5s ease;
     pointer-events: none;
 }
 
@@ -71,15 +82,19 @@ sub{
 }
 
 .pads-container{
-    width: 95vw;
+    /* width: 95vw; */
     display: flex;
     flex-direction: column;
+    position: relative;
+    margin: 0 2px;
+
 }
 
 
 .pad{
     height: 20vw;   
     width: 20vw;
+    touch-action: manipulation;
 
     display: flex;
     justify-content: center;
@@ -89,49 +104,54 @@ sub{
     border-radius: 10px;
     opacity: .8;
     transition: all 0.1s ease-out;
+    
 }
 
-.c{
-    background: #F1F4F6;
+.padcolor0{
+    background: white;
+    color: black;
 }
 
-.d{
+.padcolor1{
     background: #29DBE5;
 }
   
-.e, .dsharp{
+.padcolor2{
     background: #2F93F6;
 }
   
-.f, .esharp{
+.padcolor3{
     background: #B400FF;
 }
   
-.g{
+.padcolor4{
     background: #FCC931;
 }
   
-.a, .gsharp{ 
+.padcolor5{ 
     background: #FF690D;
 }
 
-.b ,.asharp{
+.padcolor6{
     background: #F12C18;
 }
 
-.chrom{
-    background: #282C32;
-    color: #7E8999;
+.chr{
+    background: #D3DCE2;
 }
 
+.chr.padcolor0{
+    background: white;
+    color: black;
+}
+
+
 .pointer{
-    
     box-sizing: border-box;
     width: 3em;
     height: 3em;
     border-radius: 50%;
-    border:2px solid rgba(0,0,0,0.5);
-    background:rgba(255, 255, 255, .8);
+    background: rgba(177,187,197,.5);
     pointer-events: none;
     visibility: hidden;
     opacity: 0;
@@ -140,43 +160,125 @@ sub{
 }
 
 h4, h3{
-    color: white
+    touch-action: manipulation;
 }
 
+h3{
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    margin: .2rem;
+    font-size: .9rem;
+    color: white;
+
+}
+
+h3.active{
+    color: #282C32;
+    background-color: white;
+}
+
+.scale h3{
+    text-align: left;
+    align-self: start;
+}
+.scale h4{
+    text-align: left;
+    align-self: start;
+    margin-left: 1.2rem;
+}
+
+
+
 h4{
-    opacity: .5;
+    /* opacity: .7; */
+    color: #7E8999;
+    font-size: .8rem;
+    margin-bottom: .5rem;
+}
+
+.scale-selector-container{
+    overflow: hidden;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    display: flex;
+    touch-action: manipulation;
+
 }
 
 
 .scale-selector{
-    position: absolute;
+    flex: 1;
+    transform: translate3d(100%, 0, 0);
+    float: right;
     top:0;
     left:0;
     height: 100%;
-    width: 100%;
-    background: black;
+    background: rgba(0,0,0,.8);
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    padding: 20vh 0;
-    margin: auto;
     z-index: 1;
-    opacity: 1;
     opacity: 0;
-    transition: all 0.2s ease;
-    pointer-events: none;
+    transition: all 0.5s ease;
+    padding: .5rem 0;
+    /* align-items: center; */
+    justify-content: center;
+    pointer-events: all;
+    flex-flow: row wrap;
+    touch-action: manipulation;
+
+
 }
 
 .scale-selector.active{
     pointer-events: all;
-    opacity: .8;
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    touch-action: manipulation;
+
 }
 
-.close-scale{
+
+.key, .scale{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    touch-action: manipulation;
+    justify-content: flex-start;
+    height: 100%;
+    width: 100%;
+}
+
+.scale{
+    flex:3;
+    /* margin-right: 2rem; */
+}
+.key{
+    flex:1;
+    padding-left: 2rem;
+    overflow-y: scroll !important;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  
+}
+
+.key::-webkit-scrollbar {
+    display: none;
+  }
+  
+/* .c-key{
+    touch-action: auto;
+ */
+
+
+
+/* .close-scale{
     position: fixed;
     height: 32px;
     margin: 5px;
     top:30px;
     right:30px;
-}
+} */
+
+
