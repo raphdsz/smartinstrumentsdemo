@@ -7,7 +7,6 @@ let eventTouchArray=[];
 var pointer = document.querySelectorAll('.pointer');
 const scaleButton = document.querySelector('.scaleButton');
 const scaleMenu = document.querySelector('.scale-selector');
-// const scaleClose = document.querySelector('.close-scale');
 const majScale = document.querySelector('.major-scale');
 const majPenScale = document.querySelector('.major-pen-scale');
 const minScale = document.querySelector('.minor-scale');
@@ -44,10 +43,6 @@ notes: [],
 notesClass:[]
 };
 
-
-// notesObj["notes"] = ['c','c#','d','d#','e','f','f#','g','g#','a','a#','b'];
-// notesObj["notesClass"] = ['c half-up half-down','c# half-up half-down chrom','d half-up half-down','dsharp half-up half-down chrom','e half-up half-down','f half-up half-down','fsharp half-up half-down chrom','g half-up half-down','gsharp half-up half-down chrom','a half-up half-down','asharp half-up half-down chrom','b half-up half-down'];
-// notesObj["scale"]="maj"
 
 
 var toggle = false;
