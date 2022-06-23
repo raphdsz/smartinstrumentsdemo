@@ -316,7 +316,7 @@ gsharpKey.addEventListener("touchend",function(e){
         key.classList.remove("active");
     })
     gsharpKey.classList.add("active");
-    currentKey=7;
+    currentKey=8;
     generateScale(currentScale,currentKey);
     createPads();
     createPointer();
