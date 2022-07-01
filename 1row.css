@@ -68,6 +68,14 @@ body{
 p{
     transition: all 0.5s ease;
     pointer-events: none;
+    color:white;
+    opacity: .3;
+    font-size: 12px;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    /* top: 4px; */
+
 }
 
 .row{
@@ -87,58 +95,114 @@ sub{
     flex-direction: column;
     position: relative;
     margin: 0 2px;
-
+    font-size: 8px;
+    left:1px;
 }
 
 
 .pad{
-    height: 17vh;   
+    height: 16vh;   
     display: flex;
     justify-content: center;
     align-items: center;
     margin:2px;
     flex: 1 0;
-    border-radius: 10px;
+    border-radius: 8px;
     opacity: .8;
     transition: all 0.1s ease-out;    
+    background: #181D20;
+    position: relative;
+
 }
 
 .padcolor0{
-    background: white;
-    color: black;
+    background-color: #282C32;
+    color: white;
+}
+.padcolor0:before {
+    content: " ";
+    position: absolute;
+    /* z-index: -1; */
+    top: 8px;
+    left: 12px;
+    right: 12px;
+    border: 1.5px solid #B1BBC5;
+    border-radius:  5px;
+  }
+
+
+.padcolor1:before {
+    content: " ";
+    position: absolute;
+    /* z-index: -1; */
+    top: 8px;
+    left: 12px;
+    right: 12px;
+    border: 1.5px solid #eb0753;
+    border-radius:  5px;
 }
 
-.padcolor1{
-    background: #29DBE5;
-}
-  
-.padcolor2{
-    background: #2F93F6;
-}
-  
-.padcolor3{
-    background: #B400FF;
-}
-  
-.padcolor4{
-    background: #FCC931;
-}
-  
-.padcolor5{ 
-    background: #FF690D;
+.padcolor2:before {
+content: " ";
+position: absolute;
+/* z-index: -1; */
+    top: 8px;
+    left: 12px;
+    right: 12px;
+    border: 1.5px solid #f15187;
+    border-radius:  5px;
 }
 
-.padcolor6{
-    background: #F12C18;
+.padcolor3:before {
+content: " ";
+position: absolute;
+/* z-index: -1; */
+top: 8px;
+left: 12px;
+right: 12px;border: 1.5px solid #f583a9;
+border-radius:  5px;
 }
+
+.padcolor4:before {
+content: " ";
+position: absolute;
+/* z-index: -1; */
+top: 8px;
+left: 12px;
+right: 12px;
+border: 1.5px solid #fbc0ba;
+border-radius:  5px;
+}
+.padcolor5:before {
+content: " ";
+position: absolute;
+/* z-index: -1; */
+top: 8px;
+left: 12px;
+right: 12px;border: 1.5px solid #f56b5d;
+border-radius:  5px;
+}
+
+.padcolor6:before {
+content: " ";
+position: absolute;
+/* z-index: -1; */
+top: 8px;
+left: 12px;
+right: 12px;border: 1.5px solid #f12c18;
+border-radius:  5px;
+}
+
+
 
 .chr{
-    background: #D3DCE2;
+    border: 1.5px solid #7E8999;
+    box-shadow: 0 0 0 4px  #181D20;
 }
 
 .chr.padcolor0{
-    background: white;
-    color: black;
+    border: 1.5px solid #B1BBC5;
+    box-shadow: 0 0 0 4px  #181D20;
 }
 
 

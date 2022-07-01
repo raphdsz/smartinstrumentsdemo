@@ -430,180 +430,79 @@ function createPads(startingNote){
 
 
 
-
-
 function playNote(event){
-    synth.triggerRelease(event.target.dataset.sound);
+    if (event.cancelable) event.preventDefault();
 
-    if(event.target.classList.contains("pad")){
-        startingTouchY=event.touches[0].clientY;
-        startingTouchX=event.touches[0].clientX;
-        if (event.cancelable) event.preventDefault();
-        // synth.triggerAttackRelease(event.target.dataset.sound,"16n");
-        synth.set({ detune: 0, volume:0});
+synth.triggerRelease(event.target.dataset.sound);
+
+if(event.target.classList.contains("pad")){
+    ;[...event.targetTouches].forEach((touch)=>{
         synth.triggerAttack(event.target.dataset.sound);
-        // wait one second before triggering the release
+        event.target.classList.add(touch.identifier);
         event.target.style.opacity= "1";
-        detune();
-    }
+})
+}
 
 }
+
+
+
 function reset(event){
-    
-    if(event.target.classList.contains("pad")){
+var pads = document.querySelectorAll(".pad");
+if (event.cancelable) event.preventDefault();
 
-        synth.triggerRelease(event.target.dataset.sound);
+;[...event.changedTouches].forEach((touch)=>{
 
-        event.target.style.opacity= "0.8";
-        
-    }
+    pads.forEach(pad =>{
 
-}
-
-// function detune(){
-    
-//     if(event.touches.length===1){
-//         if(event.target.classList.contains("e")){
-//             if (event.touches[0].clientX - startingTouchX>60){
-//                 synth.set({ detune: 100});
-//             }else if (event.touches[0].clientX - startingTouchX<-60){
-//                 synth.set({ detune: -200});    
-//             }else if(event.touches[0].clientX - startingTouchX>20){
-//                 synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*2.5});
-//             }else if(event.touches[0].clientX - startingTouchX<-20){
-//                 synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*5});
-//             }else{
-//                 synth.set({ detune: 0 });
-//             }
-//         }else if(event.target.classList.contains("f")){
-//             if (event.touches[0].clientX - startingTouchX>60){
-//                 synth.set({ detune: 200});
-//             }else if (event.touches[0].clientX - startingTouchX<-60){
-//                 synth.set({ detune: -100});    
-//             }else if(event.touches[0].clientX - startingTouchX>20){
-//                 synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*5});
-//             }else if(event.touches[0].clientX - startingTouchX<-20){
-//                 synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*2.5});
-//             }else{
-//                 synth.set({ detune: 0 });
-//             }
-//         }else if(event.target.classList.contains("c")){
-//             if (event.touches[0].clientX - startingTouchX>60){
-//                 synth.set({ detune: 200});
-//             }else if (event.touches[0].clientX - startingTouchX<-60){
-//                 synth.set({ detune: -100});    
-//             }else if(event.touches[0].clientX - startingTouchX>20){
-//                 synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*5});
-//             }else if(event.touches[0].clientX - startingTouchX<-20){
-//                 synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*2.5});
-//             }else{
-//                 synth.set({ detune: 0 });
-//             }
-//         }else if(event.target.classList.contains("b")){
-//             if (event.touches[0].clientX - startingTouchX>60){
-//                 synth.set({ detune: 100});
-//             }else if (event.touches[0].clientX - startingTouchX<-60){
-//                 synth.set({ detune: -200});    
-//             }else if(event.touches[0].clientX - startingTouchX>20){
-//                 synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*2.5});
-//             }else if(event.touches[0].clientX - startingTouchX<-20){
-//                 synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*5});
-//             }else{
-//                 synth.set({ detune: 0 });
-//             }
-//         }else if (event.touches[0].clientX - startingTouchX>60){
-//             synth.set({ detune: 200});
-//         }else if (event.touches[0].clientX - startingTouchX<-60){
-//             synth.set({ detune: -200});    
-//         }else if(event.touches[0].clientX - startingTouchX>20){
-//             synth.set({ detune: (event.touches[0].clientX - startingTouchX-20)*5});
-//         }else if(event.touches[0].clientX - startingTouchX<-20){
-//             synth.set({ detune: (event.touches[0].clientX - startingTouchX+20)*5});
-//         }else{
-//             synth.set({ detune: 0 });
-//         }
-//         synth.set({ volume: (startingTouchY - event.touches[0].clientY)*.03 });
-//         // synth.set({ volume: (startingTouchY - event.touches[0].clientY)*.04 });
-//     }
-// }
-
-
-function detune(){
-    let minDist=20;
-    let maxDist=60;
-    let movementMultiplier = maxDist/12;
-    if(event.touches.length===1){
-        if(event.touches[0].clientX - startingTouchX>minDist){
-            if(event.target.classList.contains("full-up")){
-                if (event.touches[0].clientX - startingTouchX>maxDist){
-                    synth.set({ detune: 200});
-                }else{
-                    synth.set({ detune: (event.touches[0].clientX - startingTouchX-minDist)*movementMultiplier});
-                }
-            }else if(event.target.classList.contains("half-up")){
-                if (event.touches[0].clientX - startingTouchX>maxDist){
-                    synth.set({ detune: 100});
-                }else{
-                    synth.set({ detune: (event.touches[0].clientX - startingTouchX-minDist)*movementMultiplier/2});
-                }
-            }else if(event.target.classList.contains("threehalf-up")){
-                if (event.touches[0].clientX - startingTouchX>maxDist){
-                    synth.set({ detune: 300});
-                }else{
-                    synth.set({ detune: (event.touches[0].clientX - startingTouchX-minDist)*movementMultiplier/2*3});
-                }
-            }
-        }else if (event.touches[0].clientX - startingTouchX<-minDist){
-            if(event.target.classList.contains("full-down")){
-                if (event.touches[0].clientX - startingTouchX<-maxDist){
-                    synth.set({ detune: -200});
-                }else{
-                    synth.set({ detune: (event.touches[0].clientX - startingTouchX+minDist)*movementMultiplier});
-                }
-            }else if(event.target.classList.contains("half-down")){
-                if (event.touches[0].clientX - startingTouchX<-maxDist){
-                    synth.set({ detune: -100});
-                }else{
-                    synth.set({ detune: (event.touches[0].clientX - startingTouchX+minDist)*movementMultiplier/2});
-                }
-            }else if(event.target.classList.contains("threehalf-down")){
-                if (event.touches[0].clientX - startingTouchX<-maxDist){
-                    synth.set({ detune: -300});
-                }else{
-                    synth.set({ detune: (event.touches[0].clientX - startingTouchX+minDist)*movementMultiplier/2*3});
-                }
-            }
-        }else{
-            synth.set({ detune: 0 });
+        if(pad.classList.contains(touch.identifier)){
+            synth.triggerRelease(pad.dataset.sound);
+            pad.classList.remove(touch.identifier);
+            pad.style.opacity= "0.8";
         }
-        synth.set({ volume: (startingTouchY - event.touches[0].clientY)*.03 });
+
+    });
+})
+}
+
+
+
+
+function nextNote(event){
+var pads = document.querySelectorAll(".pad");
+
+if (event.cancelable) event.preventDefault();
+
+    ;[...event.targetTouches].forEach((touch)=>{
+        let newNote=document.elementFromPoint(touch.clientX,touch.clientY);
+        if(newNote.classList.contains("pad")){
+            pads.forEach(pad =>{
+                if(pad.classList.contains(touch.identifier)){
+                    if(pad!=newNote){
+                        console.log("changed");
+                        synth.triggerRelease(pad.dataset.sound);
+                        pad.classList.remove(touch.identifier);
+                        pad.style.opacity= ".8";
+                        synth.triggerAttack(newNote.dataset.sound);
+                        newNote.classList.add(touch.identifier);                    
+                        newNote.style.opacity= "1";          
+                    }
+                
+                }
     
-    }
+            });
+        }   
+    })
+    
+    
 }
 
 
-function addTouchLength(){
-    eventTouchArray.push(event.touches.length);
-}
-
-function changeTouchLength(){
-    if (eventTouchArray[eventTouchArray.length-1]>=2){
-        startingTouchY=event.touches[0].clientY;
-        startingTouchX=event.touches[0].clientX;
-    }
-
-}
 
 
-// padsContainer.addEventListener("mousedown",playNote);
 padsContainer.addEventListener("touchstart",playNote);
 padsContainer.addEventListener("touchend",reset);
-padsContainer.addEventListener("touchmove",detune);
-padsContainer.addEventListener("touchstart",addTouchLength);
-padsContainer.addEventListener("touchend",changeTouchLength);
-
-// padsContainer.addEventListener("mouseup",reset);
-// padsContainer.addEventListener("mouseout",reset);
+padsContainer.addEventListener("touchmove",nextNote);
 
 
 

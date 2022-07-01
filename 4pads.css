@@ -68,6 +68,14 @@ body{
 p{
     transition: all 0.5s ease;
     pointer-events: none;
+    color:white;
+    opacity: .3;
+    font-size: 12px;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    top: 4px;
+    right: 10px;
 }
 
 .row{
@@ -79,6 +87,9 @@ p{
 
 sub{
     position: relative;
+    font-size: 8px;
+    left:1px;
+
 }
 
 .pads-container{
@@ -92,49 +103,95 @@ sub{
 
 
 .pad{
-    height: 25vw;   
+    height: calc(25vw - 12px);   
     width: 25vw;
     touch-action: manipulation;
-
     display: flex;
     justify-content: center;
     align-items: center;
-    margin:2px;
-    flex: 1 0  calc(25% - 4px);
+    margin:6px;
+    flex: 1 0  calc(25% - 12px);
     border-radius: 10px;
     opacity: .8;
     transition: all 0.1s ease-out;
+    background: #181D20;
+    position: relative;
+}
+
+
+.padcolor0{
+    border: 2px solid white;
+    box-shadow: 0 0 0 4px  #181D20;
+
+}
+
+
+.padcolor1{
+    border: 2px solid #eb0753;
+    box-shadow: 0 0 0 4px  #181D20;
     
 }
 
+  
+.padcolor2{
+    border: 2px solid #f15187;
+        box-shadow: 0 0 0 4px  #181D20;
+
+}
+  
+.padcolor3{
+    border: 2px solid #f583a9;
+        box-shadow: 0 0 0 4px  #181D20;
+
+}
+  
+.padcolor4{
+    border: 2px solid #fbc0ba;
+        box-shadow: 0 0 0 4px  #181D20;
+
+}
+  
+.padcolor5{ 
+    border: 2px solid #f56b5d;
+        box-shadow: 0 0 0 4px  #181D20;
+
+}
+
+.padcolor6{
+    border: 2px solid #f12c18;
+        box-shadow: 0 0 0 4px  #181D20;
+
+}
+
+/* 
 .padcolor0{
     background: white;
     color: black;
 }
 
 .padcolor1{
-    background: #29DBE5;
+    background: #eb0753;
 }
   
 .padcolor2{
-    background: #2F93F6;
+    background: #ed2064;
 }
   
 .padcolor3{
-    background: #B400FF;
+    background: #ef3975;
 }
   
 .padcolor4{
-    background: #FCC931;
+    background: #f15187;
 }
   
 .padcolor5{ 
-    background: #FF690D;
+    background: #f36a98;
 }
 
 .padcolor6{
-    background: #F12C18;
-}
+    background: #f583a9;
+} */
 
 .chr{
     background: #D3DCE2;
